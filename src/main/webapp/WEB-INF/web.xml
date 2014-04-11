@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+
+	<!-- Tell the server to use BASIC authentication. -->
+	<login-config>
+		<auth-method>BASIC</auth-method>
+		<realm-name>Hot-Dot-Com Intranet</realm-name>
+	</login-config>
+
+	<!-- Protect financial plan. Employees or executives. -->
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>Financial Plan</web-resource-name>
+			<url-pattern>/financial-plan.html</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>employee</role-name>
+			<role-name>executive</role-name>
+		</auth-constraint>
+	</security-constraint>
+
+	<!-- Protect business plan. Executives only. -->
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>Business Plan</web-resource-name>
+			<url-pattern>/business-plan.html</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>executive</role-name>
+		</auth-constraint>
+	</security-constraint>
+
+	<!-- Protect compensation plan. Employees or executives. -->
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>Compensation Plan</web-resource-name>
+			<url-pattern>/employee-pay.jsp</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>employee</role-name>
+			<role-name>executive</role-name>
+		</auth-constraint>
+	</security-constraint>
+
+	<!-- The security roles used in this app. -->
+	<security-role>
+		<role-name>employee</role-name>
+	</security-role>
+	<security-role>
+		<role-name>executive</role-name>
+	</security-role>
+</web-app>
